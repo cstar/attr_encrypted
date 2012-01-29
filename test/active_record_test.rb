@@ -7,9 +7,9 @@ puts "\nTesting with ActiveRecord #{ActiveRecord::VERSION::STRING rescue ENV['AC
 require File.expand_path('../test_helper', __FILE__)
 
 ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => ':memory:'
-# Sqlite seems to be picky and requires that
-#ActiveRecord::Base.logger = Logger.new(nil)
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+# AR Sqlite Adapter seems to be picky and requires a logger
+ActiveRecord::Base.logger = Logger.new(nil)
+#ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 def create_people_table
   silence_stream(STDOUT) do

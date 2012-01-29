@@ -1,4 +1,10 @@
-require 'datamapper'
+# Gem require has changed ... ?
+begin
+  require 'datamapper'
+rescue LoadError
+  require 'data_mapper'
+end
+
 require File.expand_path('../test_helper', __FILE__)
 
 DataMapper.setup(:default, 'sqlite3::memory:')
