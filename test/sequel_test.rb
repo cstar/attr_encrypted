@@ -1,3 +1,4 @@
+require 'sequel'
 require File.expand_path('../test_helper', __FILE__)
 
 DB = Sequel.sqlite

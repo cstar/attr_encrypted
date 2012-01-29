@@ -1,6 +1,15 @@
+gem 'activerecord', ENV['ACTIVE_RECORD_VERSION'] if ENV['ACTIVE_RECORD_VERSION']
+require 'active_support/core_ext/module/delegation'
+require 'active_record'
+require 'logger'
+puts "\nTesting with ActiveRecord #{ActiveRecord::VERSION::STRING rescue ENV['ACTIVE_RECORD_VERSION']}"
+
 require File.expand_path('../test_helper', __FILE__)
 
 ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => ':memory:'
+# Sqlite seems to be picky and requires that
+#ActiveRecord::Base.logger = Logger.new(nil)
+ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 def create_people_table
   silence_stream(STDOUT) do
@@ -66,8 +75,10 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_find_by_email
+    ActiveRecord::Base.logger.info "Start TEST SHOULD FIND BY EMAIL"
     @person = Person.create(:email => 'test@example.com')
     assert_equal @person, Person.find_by_email('test@example.com')
+    ActiveRecord::Base.logger.info "End TEST SHOULD FIND BY EMAIL"
   end
 
   def test_should_find_by_email_and_password
