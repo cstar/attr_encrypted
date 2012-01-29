@@ -8,8 +8,7 @@ module AttrEncrypted
     base.class_eval do
       include InstanceMethods
       attr_writer :attr_encrypted_options
-      @attr_encrypted_options = {}
-      @encrypted_attributes = defined?(ActiveSupport::HashWithIndifferentAccess) ? ActiveSupport::HashWithIndifferentAccess.new({}) : Hash.new({})
+      @attr_encrypted_options, @encrypted_attributes = {}, Hash.new({})
     end
   end
 

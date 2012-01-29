@@ -57,7 +57,7 @@ if defined?(ActiveRecord::Base)
               encrypted_attributes.each do |attr, attr_opts|
                 opt_key = opts.has_key?(attr) ? attr : (opts.has_key?(attr.to_s) ? attr.to_s : nil)
                 if opt_key
-                  opts[attr_opts[:attribute]] = ::ActiveRecord::Base.encrypt(attr, opts[opt_key], attr_opts)
+                  opts[attr_opts[:attribute]] = ::ActiveRecord::Base.encrypt(attr.to_sym, opts[opt_key], attr_opts)
                   opts.delete(opt_key)
                 end
               end
