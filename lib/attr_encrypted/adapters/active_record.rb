@@ -50,7 +50,7 @@ if defined?(ActiveRecord::Base)
           # are encrypted in the database, but you can still look up a user by email for logging in
           #
           def build_where_with_attr_encrypted(opts, other = [])
-            ::ActiveRecord::Base.logger.info self
+            #::ActiveRecord::Base.logger.info self
             if opts.is_a? Hash
               opts = opts.dup
 
